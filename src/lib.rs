@@ -57,7 +57,7 @@ fn parse_hex_to_rgba(hex: &str) -> (u8, u8, u8, u8) {
 	// Strip any prefixes
 	let start = match bytes {
 		[b'0', b'x', ..] => 2,
-		[b'#', ..] => 1,
+		[b'#', ..] | [b'x', ..] => 1,
 		_ => 0,
 	};
 
@@ -95,7 +95,7 @@ fn parse_hex_to_rgba(hex: &str) -> (u8, u8, u8, u8) {
 			(hv(s[4]) << 4) | hv(s[5]),
 			255,
 		),
-		// 3 Byte Hex Values [RGBA 2]
+		// 8 Byte Hex Values [RGBA 2]
 		8 => (
 			(hv(s[0]) << 4) | hv(s[1]),
 			(hv(s[2]) << 4) | hv(s[3]),

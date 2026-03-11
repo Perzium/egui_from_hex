@@ -1,6 +1,6 @@
 [package]
 name = "egui_from_hex"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["Perzium"]
 description = "Fastest EGUI `from_hex()` function for Color32, available in ANY version of EGUI."
@@ -9,6 +9,10 @@ repository = "https://github.com/Perzium/egui_from_hex"
 readme = "README.md"
 keywords = ["egui", "color", "colour", "hex", "performance"]
 categories = ["gui", "visualization"]
+
+[package.metadata]
+shame_level = "Extremely high, like, through the roof"
+reason = "I forgot x was a letter"
 
 [dependencies]
 egui = ">=0.1"
