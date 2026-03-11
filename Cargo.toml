@@ -1,0 +1,15 @@
+[package]
+name = "egui_from_hex_fast"
+version = "0.1.0"
+edition = "2024"
+authors = ["Perzium"]
+description = "Fastest EGUI `from_hex()` function for Color32, available in ANY version of EGUI."
+license = "MIT OR Apache-2.0"
+repository = ""
+readme = "README.md"
+documentation = ""
+keywords = ["egui", "color", "colour", "hex", "performance"]
+categories = ["gui", "visualization"]
+
+[dependencies]
+egui = ">=0.1"
