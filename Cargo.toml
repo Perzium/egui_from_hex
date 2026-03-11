@@ -5,9 +5,8 @@ edition = "2024"
 authors = ["Perzium"]
 description = "Fastest EGUI `from_hex()` function for Color32, available in ANY version of EGUI."
 license = "MIT OR Apache-2.0"
-repository = ""
+repository = "https://github.com/Perzium/egui_from_hex"
 readme = "README.md"
-documentation = ""
 keywords = ["egui", "color", "colour", "hex", "performance"]
 categories = ["gui", "visualization"]
 
