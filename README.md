@@ -5,10 +5,29 @@ It is made to work with older versions of EGUI, as well as improve the current `
 
 
 ## Usage
+
 The syntax is literally just how you use `Color32` normally.
 
-Version 0.1.2 added error handling instead of defaulting to black there were any errors.
+Version 0.1.2 added error handling instead of defaulting to black if there were any errors.
 If this inconveniences you, you can use the `unwrap()` function, or switch back to the previous version.
+
+Using the `from_u32()` function and its siblings:
+```rust
+// For u32
+use egui_from_hex::HexColor;
+let color = egui::Color32::from_u32(0xEDEBACFF);
+```
+
+```rust
+// For u32 premultiplied
+use egui_from_hex::HexColor;
+let color = egui::Color32::from_u32_premultiplied(0xEDEBAC69);
+```
+
+Note: Some u32 functions might require bitshifting (as some people might use RRGGBB, AARRGGBB, etc.)
+but everything regarding that is explained within the function docs.
+
+If you have any questions, feel free to contact me (Issues | Discussions).
 
 ## Examples
 

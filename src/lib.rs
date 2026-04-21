@@ -9,8 +9,26 @@
 //! 
 //! The syntax is literally just how you use `Color32` normally.
 //! 
-//! Version 0.1.2 added error handling instead of defaulting to black there were any errors.
+//! Version 0.1.2 added error handling instead of defaulting to black if there were any errors.
 //! If this inconveniences you, you can use the `unwrap()` function, or switch back to the previous version.
+//! 
+//! Using the `from_u32()` function and its siblings:
+//! ```
+//! // For u32
+//! use egui_from_hex::HexColor;
+//! let color = egui::Color32::from_u32(0xEDEBACFF);
+//! ```
+//! 
+//! ```
+//! // For u32 premultiplied
+//! use egui_from_hex::HexColor;
+//! let color = egui::Color32::from_u32_premultiplied(0xEDEBAC69);
+//! ```
+//! 
+//! Note: Some u32 functions might require bitshifting (as some people might use RRGGBB, AARRGGBB, etc.)
+//! but everything regarding that is explained within the function docs.
+//! 
+//! If you have any questions, feel free to contact me (Issues | Discussions).
 //! 
 //! ## Examples
 //! 
@@ -43,6 +61,8 @@
 //! 
 //! Note: Thank you for using my crate.
 
+#![allow(clippy::tabs_in_doc_comments)]
+
 use egui::Color32;
 use std::fmt;
 
@@ -68,8 +88,42 @@ impl fmt::Display for HexParseError {
 /// Implementing Error for HexParseError {}
 impl std::error::Error for HexParseError {}
 
-/// A basic trait; Low-allocation Hex color parsing.
+/// A basic trait; Zero-allocation Hex color parsing.
 pub trait HexColor: Sized {
+	/// ## Parses a u32 to a `Color32` using Straight Alpha.
+	/// 
+	/// Supports `RRGGBBAA` only.
+	/// 
+	/// If you're using a `u32` with `0xRRGGBB00`, use function as
+	/// `from_u32_premultiplied(your_u32 | 0xFF)`
+	/// 
+	/// If you're using a `u32` with `0x00RRGBB`, use function as
+	/// `from_u32_premultiplied((0xEDEBAC << 8) | 0xFF)`
+	/// 
+	/// ### Example
+	/// ```
+	/// use egui_from_hex::HexColor;
+	/// let color = egui::Color32::from_u32(0xEDEBACFF);
+	/// ```
+	fn from_u32(color: u32) -> Self;
+	
+	/// ## Parses a u32 to a `Color32` using Premultiplied Alpha.
+	/// 
+	/// Supports `RRGGBBAA` only.
+	/// 
+	/// If you're using a `u32` with `0xRRGGBB00`, use function as
+	/// `from_u32_premultiplied(your_u32 | 0xFF)`
+	/// 
+	/// If you're using a `u32` with `0x00RRGBB`, use function as
+	/// `from_u32_premultiplied((0xEDEBAC << 8) | 0xFF)`
+	/// 
+	/// ### Example
+	/// ```
+	/// use egui_from_hex::HexColor;
+	/// let color = egui::Color32::from_u32_premultiplied(0xEDEBAC69);
+	/// ```
+	fn from_u32_premultiplied(color: u32) -> Self;
+
 	/// ## Parses a Hex string to a `Color32` using Straight Alpha.
 	/// 
 	/// Supports `RGB`, `RGBA`, `RRGGBB`, `RRGGBBAA`.
@@ -87,7 +141,7 @@ pub trait HexColor: Sized {
 	/// 
 	/// No prefixes are also supported.
 	fn from_hex(hex: &str) -> Result<Self, HexParseError>;
-	
+
 	/// ## Parses a Hex string to a `Color32` using Premultiplied Alpha.
 	/// 
 	/// Supports `RGB`, `RGBA`, `RRGGBB`, `RRGGBBAA`.
@@ -121,6 +175,30 @@ impl HexColor for Color32 {
 	fn from_hex_premultiplied(hex: &str) -> Result<Self, HexParseError> {
 		let (r, g, b, a) = parse_hex_to_rgba(hex)?;
 		Ok(Self::from_rgba_premultiplied(r, g, b, a))
+	}
+
+	#[inline]
+	fn from_u32(color: u32) -> Self {
+		let (r, g, b, a) = (
+			(color >> 24) as u8,
+			(color >> 16) as u8,
+			(color >> 8) as u8,
+			(color) as u8,
+		);
+
+		Self::from_rgba_unmultiplied(r, g, b, a)
+	}
+
+	#[inline]
+	fn from_u32_premultiplied(color: u32) -> Self {
+		let (r, g, b, a) = (
+			(color >> 24) as u8,
+			(color >> 16) as u8,
+			(color >> 8) as u8,
+			color as u8,
+		);
+
+		Self::from_rgba_premultiplied(r, g, b, a)
 	}
 }
 
