@@ -71,8 +71,30 @@ dependencies = [
 [[package]]
 name = "egui_from_hex"
 version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "674c12b9869aedde2883e9a9ac202634b4dcad642284fb96d8b0639d4deb6c99"
 dependencies = [
  "egui",
+]
+
+[[package]]
+name = "egui_from_hex"
+version = "0.2.2"
+dependencies = [
+ "egui",
+ "egui_from_hex_macros",
+]
+
+[[package]]
+name = "egui_from_hex_macros"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "083546a8d2392f204371908bd13a41ebb735f04f83f14d493eeaae7aa0f9d9f1"
+dependencies = [
+ "egui_from_hex 0.2.1",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

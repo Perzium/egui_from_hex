@@ -1,3 +1,8 @@
+# 0.2.2
+Finalized the support for macros.
+
+Note: Had a circular dependency. Fixed it!
+
 # 0.2.1
 Added support for macros.
 

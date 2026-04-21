@@ -2,7 +2,7 @@
 name = "egui_from_hex"
 authors = ["Perzium"]
 description = "Fastest EGUI `from_hex()` function for Color32, available in ANY version of EGUI."
-version = "0.2.1"
+version = "0.2.2"
 
 edition = "2024"
 license = "MIT"
@@ -24,7 +24,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 [dependencies]
 egui = ">=0.1.0"
 
-# egui_from_hex_macros = { version = "0.1.0", optional = true }
+egui_from_hex_macros = { version = "0.1.0", optional = true }
 
-# [features]
-# macros = ["dep:egui_from_hex_macros"]
+[features]
+macros = ["dep:egui_from_hex_macros"]
