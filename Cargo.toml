@@ -2,7 +2,7 @@
 name = "egui_from_hex"
 authors = ["Perzium"]
 description = "Fastest EGUI `from_hex()` function for Color32, available in ANY version of EGUI."
-version = "0.2.0"
+version = "0.2.1"
 
 edition = "2024"
 license = "MIT"
@@ -17,5 +17,14 @@ categories = ["gui", "visualization"]
 shame_level = "Extremely high, like, through the roof"
 reason = "I forgot x was a letter"
 
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
 [dependencies]
 egui = ">=0.1.0"
+
+# egui_from_hex_macros = { version = "0.1.0", optional = true }
+
+# [features]
+# macros = ["dep:egui_from_hex_macros"]

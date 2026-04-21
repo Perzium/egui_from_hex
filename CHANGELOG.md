@@ -1,3 +1,10 @@
+# 0.2.1
+Added support for macros.
+
+Added:
+	- A function which exports the `parse_hex_to_rgba()` function.
+	- Feature flag: `macros`
+
 # 0.2.0
 Handling `from_u32()` and `from_u32_premultiplied`.
 \+ Shame fixes.

@@ -1,3 +1,6 @@
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![allow(clippy::tabs_in_doc_comments)]
+
 //! # egui_from_hex
 //! 
 //! EGUI from Hex is a simple, very lightweight and compatible crate to add to any of your projects.
@@ -64,7 +67,13 @@
 //! 
 //! Note: Thank you for using my crate.
 
-#![allow(clippy::tabs_in_doc_comments)]
+#[cfg(feature = "macros")]
+#[cfg_attr(docsrs, doc(cfg(feature = "macros")))]
+pub use egui_from_hex_macros::hex;
+
+#[cfg(feature = "macros")]
+#[cfg_attr(docsrs, doc(cfg(feature = "macros")))]
+pub use egui_from_hex_macros::hex_premultiplied;
 
 use egui::Color32;
 use std::fmt;
@@ -263,4 +272,11 @@ fn parse_hex_to_rgba(hex: &str) -> Result<(u8, u8, u8, u8), HexParseError> {
 		// Fallback
 		_ => Err(HexParseError::InvalidLength),
 	}
+}
+
+/// A necessity for the macro; Won't be visible in docs.rs
+/// Won't increase binary size as well
+#[doc(hidden)]
+pub fn __internal_parse_hex(hex: &str) -> Result<(u8, u8, u8, u8), HexParseError> {
+	parse_hex_to_rgba(hex)
 }
