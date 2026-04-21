@@ -10,6 +10,7 @@
 //! The syntax is literally just how you use `Color32` normally.
 //! 
 //! Version 0.1.2 added error handling instead of defaulting to black if there were any errors.
+//! Version 0.1.2 added error handling instead of defaulting to black if there were any errors.
 //! If this inconveniences you, you can use the `unwrap()` function, or switch back to the previous version.
 //! 
 //! Using the `from_u32()` function and its siblings:
@@ -91,7 +92,9 @@ impl fmt::Display for HexParseError {
 impl std::error::Error for HexParseError {}
 
 /// A basic trait; Zero-allocation Hex color parsing.
+/// A basic trait; Zero-allocation Hex color parsing.
 pub trait HexColor: Sized {
+
 	/// ## Parses a u32 to a `Color32` using Straight Alpha.
 	/// 
 	/// Supports `RRGGBBAA` only.
@@ -143,6 +146,7 @@ pub trait HexColor: Sized {
 	/// 
 	/// No prefixes are also supported.
 	fn from_hex(hex: &str) -> Result<Self, HexParseError>;
+
 
 	/// ## Parses a Hex string to a `Color32` using Premultiplied Alpha.
 	/// 
